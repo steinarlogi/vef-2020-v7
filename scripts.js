@@ -12,7 +12,7 @@ function start() {
 }
 
 // Hér er gott að commenta út til að vinna í encode/decode föllum fyrst og síðan „viðmóti“ forrits
-start();
+//start();
 
 /**
  * Kóðar streng með því að hliðra honum um n stök.
@@ -22,10 +22,16 @@ start();
  * @returns {string} Upprunalegi strengurinn hliðraður um n til hægri
  */
 function encode(str, n) {
+  let temp = "";
+
   for(let i = 0; i < str.length; i++) {
 
-    
+    let index = LETTERS.indexOf(str[i]);
+
+    temp = temp + LETTERS[(index + n) % LETTERS.length];
   }
+
+  str = temp;
 
   return str;
 }
@@ -38,6 +44,17 @@ function encode(str, n) {
  * @returns {string} Upprunalegi strengurinn hliðraður um n til vinstri
  */
 function decode(str, n) {
+  let temp = "";
+
+  for(let i = 0; i < str.length; i++) {
+
+    let index = LETTERS.indexOf(str[i]);
+
+    temp = temp + LETTERS[(((index - n) % LETTERS.length) + LETTERS.length) % LETTERS.length];
+  }
+
+  str = temp;
+
   return str;
 }
 
