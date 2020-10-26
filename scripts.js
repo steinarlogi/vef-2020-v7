@@ -8,11 +8,54 @@ const LETTERS = `AÁBDÐEÉFGHIÍJKLMNOÓPRSTUÚVXYÝÞÆÖ`;
  * Byrja forrit.
  */
 function start() {
-  alert('Halló!')
+  do {
+      let ans = window.prompt('Hvort viltu kóða eða afkóða streng? Skrifaðu „kóða“ eða „afkóða“');
+      console.log(ans);
+
+      if(ans != "kóða" && ans != "afkóða") {
+        window.alert(`Veit ekki hvaða aðgerð ${ans} er.`);
+        continue;
+      } else {
+          let n = window.prompt(`Hversu mikið á að hliðra streng? Gefðu upp heiltölu á bilinu [1, 31]`);
+          n = window.parseInt(n);
+          console.log(n);
+          console.log(typeof n);
+          console.log(n>31);
+          if(Number.isNaN(n) || n > 31 || n < 0) {
+            window.alert(`${n} er ekki heiltala á bilinu [1, 31]. Reyndu aftur.`);
+
+            continue;
+          } else {
+
+            let str = window.prompt(`Gefðu upp strenginn sem á að ${ans} með hliðrun ${n}`);
+            let correct = true;
+            str = str.toUpperCase();
+
+            for(let i = 0; i < str.length; i++) {
+              if(LETTERS.indexOf(str[i]) < 0) {
+                correct = false;
+                console.log(LETTERS.indexOf(str[i]));
+              }
+            }
+
+            if(!correct) {
+              window.alert(`Þú gafst upp stafi sem ekki er hægt að ${ans}`);
+              continue;
+            } else if(ans == 'kóða') {
+              let encodedString = encode(str, n);
+              window.alert(`Hér er kóðaði strengurinn ${encodedString}`);
+            } else {
+              let decodedString = decode(str, n);
+              window.alert(`Hér er afkóðaði strengurinn ${decodedString}`);
+            }
+
+          }
+        }
+  } while(true);
+
 }
 
-// Hér er gott að commenta út til að vinna í encode/decode föllum fyrst og síðan „viðmóti“ forrits
-//start();
+start();
 
 /**
  * Kóðar streng með því að hliðra honum um n stök.
