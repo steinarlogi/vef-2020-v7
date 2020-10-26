@@ -21,7 +21,7 @@ function start() {
           console.log(n);
           console.log(typeof n);
           console.log(n>31);
-          if(Number.isNaN(n) || n > 31 || n < 0) {
+          if(Number.isNaN(n) || !Number.isInteger(n) || n > 31 || n < 0) {
             window.alert(`${n} er ekki heiltala á bilinu [1, 31]. Reyndu aftur.`);
 
             continue;
